@@ -1,4 +1,4 @@
-package Chess.Board;
+package Chess.Game;
 
 import java.awt.Color;
 import java.awt.Graphics;
