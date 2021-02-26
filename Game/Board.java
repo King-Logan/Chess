@@ -14,5 +14,32 @@ public class Board {
             }
         }
     }
+
+    public Tile getTile(int rank, int file){
+        return tiles[rank][file];
+    }
+
+    public Tile getWhiteKing(){
+        for (Tile[] x : tiles) {
+            for (Tile y : x) {
+                if(y.getPiece().getColor() == false && y.getPiece().getType() == 'k'){
+                    return y;
+                }                
+            }
+        }
+        return null; //SHOULD NEVER HAPPEN
+    }
+    public Tile getBlackKing(){
+        for (Tile[] x : tiles) {
+            for (Tile y : x) {
+                if(y.getPiece().getColor() && y.getPiece().getType() == 'k'){
+                    return y;
+                }                
+            }
+        }
+        return null; //SHOULD NEVER HAPPEN
+    }
 }
+
+
 

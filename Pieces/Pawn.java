@@ -12,6 +12,10 @@ public class Pawn extends Piece {
         setHasMoved(false); 
     }
 
+    public char getType(){
+        return 'p';
+    }
+
     public boolean getHasMoved(){ 
         return this.hasMoved; 
     } 
@@ -28,30 +32,30 @@ public class Pawn extends Piece {
         if(getColor() == false){
             //2 space first move
             if( y == 2 && x == 0 && getHasMoved() == false){ 
-                return kingSafe(board); 
+                return kingSafe(board, board.getWhiteKing()); 
             }
             //standard move
             else if( y == 1 && x == 0 && end.getPiece() == null ){
-                return kingSafe(board); 
+                return kingSafe(board, board.getWhiteKing()); 
             }
             //standard attack 
             else if( y == 1 && Math.abs(x) == 1 && end.getPiece().getColor() == true){
-                return kingSafe(board); 
+                return kingSafe(board, board.getWhiteKing());
             }
         } 
         //black pawns
         if(getColor() == true){
             //2 space first move
             if( y == -2 && x == 0 && getHasMoved() == false){ 
-                return kingSafe(board); 
+                return kingSafe(board, board.getBlackKing()); 
             }
             //standard move
             else if( y == -1 && x == 0 && end.getPiece() == null ){
-                return kingSafe(board); 
+                return kingSafe(board, board.getBlackKing()); 
             }
             //standard attack 
             else if( y == -1 && Math.abs(x) == 1 && end.getPiece().getColor() == false){
-                return kingSafe(board); 
+                return kingSafe(board, board.getBlackKing()); 
             }
         }
         
