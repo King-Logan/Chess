@@ -1,51 +1,48 @@
 package Game;
+
 import Pieces.Piece;
 
 public class Tile {
-    private boolean color = false;  //True = Black, False = White
-    private int rank, file;         //location of tile
-    private Piece piece;            //piece on tile
+    protected final int coordinate; //numerical value of tile
+    private Piece piece;
 
-    public Tile(int rank, int file, Piece piece){ //constructor
-        this.setRank(rank);
-        this.setFile(file);
-        this.setPiece(piece);
-        if( (rank + file) % 2 == 0 ){
-            this.setColor(true);
+    public Tile(final int coordinate, Piece piece){
+        this.coordinate = coordinate;
+        this.piece = piece;
+    }
+
+    public boolean isOccupied(){
+        if(this.getPiece() != null){
+            return true;
         }
+        return false;
     }
 
-    //getters and setters
-    public void setColor(boolean color){ 
-        this.color = color;
-    }
-    
-    public boolean getColor(){ 
-        return this.color; 
+    public int getCoordinate(){ //returns numerical value of tile (0-63)
+        return this.coordinate;
     }
 
-    public void setRank(int rank){ 
-        this.rank = rank; 
-    }
-    
-    public int getRank(){ 
-        return this.rank; 
+    public int getRow(){ //returns row of board
+        return coordinate / 8; 
     }
 
-    public void setFile(int file){ 
-        this.file = file; 
-    }
-    
-    public int getFile(){ 
-        return this.file; 
+    public int getColumn(){ //returns column of board
+        return coordinate % 8;
     }
 
-    public void setPiece(Piece piece){ 
+    public void setPiece(Piece piece){ //sets piece on tile
         this.piece = piece; 
     }
     
-    public Piece getPiece(){ 
+    public Piece getPiece(){ //returns piece on tile
         return this.piece; 
     }
-
+    
+    public static void main(String[] args) {
+        Tile t = new Tile(15, null);
+        System.out.println(t.getCoordinate());
+        System.out.println(t.getRow());
+        System.out.println(t.getColumn());
+        System.out.println(t.isOccupied());
+    }
 }

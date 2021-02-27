@@ -1,6 +1,6 @@
 package Game;
 
-public class Board {
+public class OldBoard {
     Tile[][] tiles;
 
     public Board(){

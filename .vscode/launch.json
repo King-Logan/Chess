@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Tile",
+            "request": "launch",
+            "mainClass": "Game.Tile",
+            "projectName": "Chess_28b1ee9e"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
