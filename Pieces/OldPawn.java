@@ -7,7 +7,7 @@ public class OldPawn extends Piece {
     private boolean hasMoved;
 
     // create a pawn of color
-    public Pawn(boolean color) {
+    public OldPawn(boolean color) {
         super(color);
         setHasMoved(false); 
     }
