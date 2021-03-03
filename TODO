@@ -1,0 +1,27 @@
+1. Implement Scanner to allow for further piece movement testing
+2. Implement other pieces
+3. Implement Player class? create turns
+
+4. getWhitePieces() and getBlackPieces() in Board.java
+5. For a piece to move, king must be safe - to do this, 
+    Check movement is valid given already defined parameters, 
+    then, create a duplicate board, and check possible moves of all pieces, 
+    if they can attack the king, the move is no longer valid.
+6. Determine checkmate - to do this, 
+    utilize get---Pieces()
+    public boolean isCheckmate(Board b){}
+    if king.findLegalMoves is empty, check all other pieces
+        for(piece p: get---Pieces){
+            if(p.findLegalMoves != [] ){
+                return false;
+            }
+            else{
+                return true;
+            }
+        return false;
+    }
+7. Lastly, Implement the unique moves
+    Pawn Promotion
+    Pawn en Passant
+    King Castle
+    
