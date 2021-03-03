@@ -3,16 +3,16 @@ package Game;
 import Pieces.Piece;
 
 public class Tile {
-    protected final int coordinate; //numerical value of tile
+    private int coordinate; //numerical value of tile
     private Piece piece;
 
-    public Tile(final int coordinate, Piece piece){
+    public Tile(int coordinate, Piece piece){
         this.coordinate = coordinate;
         this.piece = piece;
     }
 
     public boolean isOccupied(){
-        if(this.getPiece() != null){
+        if(this.getPiece().toString() != "    " ){
             return true;
         }
         return false;
@@ -31,7 +31,8 @@ public class Tile {
     }
 
     public void setPiece(Piece piece){ //sets piece on tile
-        this.piece = piece; 
+        this.piece = piece;
+        piece.setCoordinate(this.coordinate); 
     }
     
     public Piece getPiece(){ //returns piece on tile

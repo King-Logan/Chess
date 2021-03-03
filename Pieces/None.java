@@ -1,6 +1,6 @@
 package Pieces;
 
-import java.util.Collection;
+import java.util.List;
 
 import Game.Board;
 
@@ -8,17 +8,17 @@ public class None extends Piece {
 
     public None(int coordinate) {
         super(Faction.NONE, PieceType.NONE, coordinate, true);
-        // TODO Auto-generated constructor stub
     }
-
+    public Faction getColor(){
+        return Faction.NONE;
+    }
     @Override
-    public Collection<Move> findLegalMoves(Board board) {
+    public List<Integer> findLegalMoves(Board board) {
         return null;
     }
 
     @Override
-    public void makeMove(Move move) {
-        
+    public void makeMove(Board board, int moveCoordinate) {
     }
 
     @Override

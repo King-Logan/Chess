@@ -1,30 +1,27 @@
 package Game;
 
 import Pieces.Knight;
-import Pieces.Move;
 import Pieces.None;
 import Pieces.Piece.Faction;
 
 public class Board {
     Tile[] tiles;
-    
-    public Board(){
-        this.resetBoard();
-    }
 
-    private void resetBoard(){
+    public Board() {
         tiles = new Tile[64];
         for (int i = 0; i < 64; i++) {
-            if( i % 3 == 0){
+            if (i == 8) {
                 tiles[i] = new Tile(i, new Knight(Faction.WHITE, i));
-            }
-            else{ 
+            } else if (i == 18) {
+                tiles[i] = new Tile(i, new Knight(Faction.BLACK, i));
+            } else {
                 tiles[i] = new Tile(i, new None(i));
             }
         }
     }
 
-    public Tile[] getTiles(){
+
+    public Tile[] getTiles() {
         return this.tiles;
     }
 
@@ -32,9 +29,9 @@ public class Board {
         String str = "---------------------------------------------------------" + '\n';
         for (int i = 7; i >= 0; i--) {
             for (int j = 0; j < 8; j++) {
-                str += "| " + tiles[8*i+j].getPiece() + " ";
+                str += "| " + tiles[8 * i + j].getPiece() + " ";
             }
-            str += "|" + '\n' + "---------------------------------------------------------" +'\n';
+            str += "|" + '\n' + "---------------------------------------------------------" + '\n';
         }
         return str;
     }
@@ -42,10 +39,9 @@ public class Board {
     public static void main(String[] args) {
         Board b = new Board();
         System.out.println(b);
-        System.out.println(b.getTiles()[3].getPiece().findLegalMoves(b));
-        b.getTiles()[3].getPiece().makeMove(new Move(3, 13, b));
-        b.getTiles()[3].getPiece().makeMove(new Move(13, 4, b));
-        b.getTiles()[3].getPiece().makeMove(new Move(3, 21, b));
+        b.getTiles()[8].getPiece().makeMove(b, 18); //take black knight
+        System.out.println(b);
+        b.getTiles()[18].getPiece().makeMove(b, 35);
         System.out.println(b);
     }
 }

@@ -1,25 +1,33 @@
 package Pieces;
 
-import java.util.Collection;
+import java.util.List;
 
 import Game.Board;
 
 public abstract class Piece {
-    final Faction color;
-    final PieceType pieceType;
+    Faction color;
+    PieceType pieceType;
     int coordinate;
     boolean isFirstMove;
 
 
 
-    public Piece(final Faction color, final PieceType pieceType, int coordinate, boolean isFirstMove){
+    public Piece(Faction color, PieceType pieceType, int coordinate, boolean isFirstMove){
         this.color = color;
         this.pieceType = pieceType;
         this.coordinate = coordinate;
     }
+    public int getCoordinate(){
+        return this.coordinate;
+    }
 
-    public abstract Collection<Move> findLegalMoves(Board board);
-    public abstract void makeMove(Move move);
+    public void setCoordinate(int coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public abstract List<Integer> findLegalMoves(Board board); //finds possible coordinates of moves
+    public abstract void makeMove(Board board, int moveCoordinate); //moves piece
+    public abstract Faction getColor();
 
     public enum PieceType {
         PAWN,
