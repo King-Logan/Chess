@@ -4,9 +4,9 @@ import java.util.List;
 
 import Game.Board;
 
-public class None extends Piece {
+public class Empty extends Piece {
 
-    public None(int coordinate) {
+    public Empty(int coordinate) {
         super(Faction.NONE, PieceType.NONE, coordinate, true);
     }
     public Faction getColor(){
@@ -23,7 +23,7 @@ public class None extends Piece {
 
     @Override
     public String toString() {
-        return "    ";
+        return "   ";
     }
     
 }

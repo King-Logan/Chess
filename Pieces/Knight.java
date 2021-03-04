@@ -18,7 +18,12 @@ public class Knight extends Piece{
     }
 
     public String toString() {
-        return " " + this.color.name().charAt(0) + "N ";
+        if(this.getColor() == Faction.WHITE){
+            return " " + ( (char) 9822) + " ";
+        }
+        else{
+            return " " + ( (char) 9816) + " ";
+        }
     }
 
     public List<Integer> findLegalMoves(Board board){
@@ -36,18 +41,9 @@ public class Knight extends Piece{
             }
         }
         return legalMoves;
-    } 
-    
-    public void makeMove(Board board, int moveCoordinate){
-        if(findLegalMoves(board).contains(moveCoordinate)){
-            int startCoordinate = this.coordinate;
-            board.getTiles()[moveCoordinate].getPiece().setCoordinate(-1);
-            board.getTiles()[startCoordinate].setPiece(new None(this.coordinate));
-            board.getTiles()[moveCoordinate].setPiece(this);        
-            System.out.println("Successful move.");
-        }else{
-            System.out.println("Failed to move.");
-        }
     }
+
+    
+    
 
 }

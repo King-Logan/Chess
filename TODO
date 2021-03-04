@@ -1,4 +1,3 @@
-1. Implement Scanner to allow for further piece movement testing
 2. Implement other pieces
 3. Implement Player class? create turns
 
@@ -25,3 +24,17 @@
     Pawn en Passant
     King Castle
     
+
+Additionally - scanner exception handling
+
+UNICODE:
+
+WHITE
+9812 - king
+9813 - queen
+9814 - rook
+9815 - bishop
+9816 - knight
+9817 - Pawn
+
+Same +6 for black
