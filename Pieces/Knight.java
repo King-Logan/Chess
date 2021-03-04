@@ -35,7 +35,6 @@ public class Knight extends Piece{
                 }
             }
         }
-        System.out.println("Available Tiles: " + legalMoves);
         return legalMoves;
     } 
     
