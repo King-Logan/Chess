@@ -17,12 +17,17 @@ public abstract class Piece {
         this.pieceType = pieceType;
         this.coordinate = coordinate;
     }
+    
     public int getCoordinate(){
         return this.coordinate;
     }
 
     public void setCoordinate(int coordinate) {
         this.coordinate = coordinate;
+    }
+    
+    public Faction getColor(){
+        return this.color;
     }
 
     public abstract List<Integer> findLegalMoves(Board board); //finds possible coordinates of moves
@@ -43,8 +48,6 @@ public abstract class Piece {
             System.out.println("Failed to move.");
         }
     }
-    
-    public abstract Faction getColor();
 
     public enum PieceType {
         PAWN,

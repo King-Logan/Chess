@@ -12,7 +12,7 @@ public class Tile {
     }
 
     public boolean isOccupied(){
-        if(this.getPiece().toString() != "    " ){
+        if(this.getPiece().toString() != "   " ){
             return true;
         }
         return false;

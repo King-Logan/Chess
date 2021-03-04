@@ -113,10 +113,6 @@ public class Board {
         }
         
         s.close();
-            /*System.out.println(b);
-        b.getTiles()[8].getPiece().makeMove(b, 18); //take black knight
-        System.out.println(b);
-        b.getTiles()[18].getPiece().makeMove(b, 35);
-        System.out.println(b);*/
+       
     }
 }

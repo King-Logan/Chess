@@ -13,10 +13,6 @@ public class Knight extends Piece{
         super(color, PieceType.KNIGHT, coordinate, true);
     }
 
-    public Faction getColor(){
-        return this.color;
-    }
-
     public String toString() {
         if(this.getColor() == Faction.WHITE){
             return " " + ( (char) 9822) + " ";
