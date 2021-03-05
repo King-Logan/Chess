@@ -6,19 +6,7 @@
     Check movement is valid given already defined parameters, 
     then, create a duplicate board, and check possible moves of all pieces, 
     if they can attack the king, the move is no longer valid.
-6. Determine checkmate - to do this, 
-    utilize get---Pieces()
-    public boolean isCheckmate(Board b){}
-    if king.findLegalMoves is empty, check all other pieces
-        for(piece p: get---Pieces){
-            if(p.findLegalMoves != [] ){
-                return false;
-            }
-            else{
-                return true;
-            }
-        return false;
-    }
+6. Fix null pointer error in checkmate
 7. Lastly, Implement the unique moves
     Pawn Promotion
     Pawn en Passant
