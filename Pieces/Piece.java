@@ -29,10 +29,10 @@ public abstract class Piece {
     public Faction getColor(){
         return this.color;
     }
-
+    
     public abstract List<Integer> findLegalMoves(Board board); //finds possible coordinates of moves
     public void makeMove(Board board, int moveCoordinate){
-        if(findLegalMoves(board).contains(moveCoordinate)){
+        if(findLegalMoves(board).contains(moveCoordinate)){ 
             boolean capture = board.getTiles()[moveCoordinate].isOccupied();
             String captureType = board.getTiles()[moveCoordinate].getPiece().toString();
             int startCoordinate = this.coordinate;
