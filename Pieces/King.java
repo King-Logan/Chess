@@ -31,6 +31,9 @@ public class King extends Piece {
     }
 
     public boolean isCheckmate(Board board){ //check moves of allies to determine if lost
+        if(!this.findLegalMoves(board).isEmpty()){
+            return false;
+        }
         List<Piece> allyPieces;
         if(this.color == Faction.BLACK){
             allyPieces = board.getBlackPieces();
