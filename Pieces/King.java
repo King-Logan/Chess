@@ -13,42 +13,6 @@ public class King extends Piece {
         super(color, PieceType.KING, coordinate, true);
     }
 
-    public boolean isCheck(Board board){
-        List<Piece> enemyPieces;
-        if(this.color == Faction.BLACK){
-            enemyPieces = board.getWhitePieces();
-        }
-        else{
-            enemyPieces = board.getBlackPieces();
-        }
-        
-        for (Piece piece : enemyPieces) {
-            if(piece.findLegalMoves(board).contains(this.coordinate)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isCheckmate(Board board){ //check moves of allies to determine if lost
-        if(!this.findLegalMoves(board).isEmpty()){
-            return false;
-        }
-        List<Piece> allyPieces;
-        if(this.color == Faction.BLACK){
-            allyPieces = board.getBlackPieces();
-        }
-        else{
-            allyPieces = board.getWhitePieces();
-        }
-
-        for (Piece piece : allyPieces) {
-            if(!piece.findLegalMoves(board).isEmpty()){
-                return false;
-            }
-        }
-        return true;
-    }
 
     public String toString() {
         if(this.getColor() == Faction.WHITE){

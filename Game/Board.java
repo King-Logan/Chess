@@ -8,6 +8,7 @@ import Pieces.Bishop;
 import Pieces.Empty;
 import Pieces.King;
 import Pieces.Knight;
+import Pieces.Pawn;
 import Pieces.Piece;
 import Pieces.Queen;
 import Pieces.Rook;
@@ -16,8 +17,15 @@ import Pieces.Piece.Faction;
 public class Board {
     Tile[] tiles;
 
-    public Board() {
+    public Board(boolean newBoard){
         tiles = new Tile[64];
+        if( newBoard ){
+            fillBoard();
+        }
+    }
+
+    public void fillBoard() { //fills board with standard pieces
+        
         tiles[0] = new Tile(0, new Rook(Faction.WHITE, 0));
         tiles[7] = new Tile(7, new Rook(Faction.WHITE, 7));
         tiles[56] = new Tile(56, new Rook(Faction.BLACK, 56));
@@ -38,6 +46,13 @@ public class Board {
 
         tiles[4] = new Tile(4, new King(Faction.WHITE, 4));
         tiles[60] = new Tile(60, new King(Faction.BLACK, 60));
+
+        for (int i = 8; i < 16; i++) {
+            tiles[i] = new Tile(i, new Pawn(Faction.WHITE, i));
+        }
+        for (int i = 48; i < 56; i++) {
+            tiles[i] = new Tile(i, new Pawn(Faction.BLACK, i));
+        }
         
         for (int i = 0; i < 64; i++) {
             if (tiles[i] == null){
@@ -68,6 +83,10 @@ public class Board {
 
     public Tile[] getTiles() {
         return this.tiles;
+    }
+
+    public void setTile(int index, Tile tile){
+        this.tiles[index] = tile;
     }
 
     public List<Piece> getWhitePieces(){ //list of all active white pieces
@@ -107,6 +126,14 @@ public class Board {
         return blackPieces;
     }
 
+    public List<Integer> getBlackPieceCoordinates(){ //list of coordinates of all active black pieces
+        List<Integer> blackPieceCoordinates = new ArrayList<>();
+        for (Piece piece : this.getBlackPieces()) {
+            blackPieceCoordinates.add(piece.getCoordinate());
+        }
+        return blackPieceCoordinates;
+    }
+    
     public King getBlackKing(){
         for( Piece piece : this.getBlackPieces()){
             if(piece.toString() == " " + ( (char) 9812) + " "){
@@ -114,14 +141,6 @@ public class Board {
             }
         }
         return null;
-    }
-
-    public List<Integer> getBlackPieceCoordinates(){ //list of coordinates of all active black pieces
-        List<Integer> blackPieceCoordinates = new ArrayList<>();
-        for (Piece piece : this.getBlackPieces()) {
-            blackPieceCoordinates.add(piece.getCoordinate());
-        }
-        return blackPieceCoordinates;
     }
 
     public String toString() {
@@ -136,15 +155,61 @@ public class Board {
         return str;
     }
 
+    public boolean isCheck(Faction color){ //determines if player is in check
+        List<Piece> enemyPieces;
+        King king;
+        if(color == Faction.BLACK){
+            enemyPieces = this.getWhitePieces();
+            king = this.getBlackKing();
+        }
+        else{
+            enemyPieces = this.getBlackPieces();
+            king = this.getWhiteKing();
+        }
+        for (Piece piece : enemyPieces) {
+            if(piece.findLegalMoves(this).contains(king.getCoordinate())){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    
+    public boolean isCheckmate(Faction color){ //check moves of allies to determine if lost
+        List<Piece> allyPieces;
+        if (color == Faction.BLACK){
+            if(this.getBlackKing() == null){ //placeholder until prevent moving into check
+                return true;
+            }
+            allyPieces = this.getBlackPieces();
+           
+        } else {
+            if (this.getWhiteKing() == null){
+                return true;
+            }
+            allyPieces = this.getWhitePieces();
+        }
+        for (Piece piece : allyPieces) {
+            if(allyPieces.isEmpty()){
+                return false;
+            }
+            else if(!piece.findLegalMoves(this).isEmpty()){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         boolean whiteTurn = true;
         Scanner s = new Scanner(System.in);
-        Board b = new Board();
-        while(!b.getBlackKing().isCheckmate(b) && !b.getWhiteKing().isCheckmate(b)){
+        Board b = new Board(true);
+        while(!b.isCheckmate(Faction.BLACK) && !b.isCheckmate(Faction.WHITE)) {
 
             while(whiteTurn){
                 System.out.println(b);
-                if(b.getWhiteKing().isCheck(b)){
+                if(b.isCheck(Faction.WHITE)){
                     System.out.println("YOU ARE IN CHECK");
                 }
                 System.out.println("White's Move");
@@ -183,19 +248,61 @@ public class Board {
                     movePiece.makeMove(b, moveCoord);
                     whiteTurn = false;
                 }
-
+            }
+            if(b.isCheckmate(Faction.BLACK)){
+                break;
             }
             
             while(!whiteTurn){
-                whiteTurn = true;
+                System.out.println(b);
+                if(b.isCheck(Faction.BLACK)){
+                    System.out.println("YOU ARE IN CHECK");
+                }
+                System.out.println("Black's Move");
+                System.out.print("Type the coordinate of the piece you wish to move: ");
+                int startCoord = b.stringToInt(s.next());
+
+                while(!b.getBlackPieceCoordinates().contains(startCoord) || b.getTiles()[startCoord].getPiece().findLegalMoves(b).isEmpty()){
+                    System.out.println("Black cannot move from that coordinate");
+                    System.out.print("Enter a valid coordinate:");
+                    startCoord = b.stringToInt(s.next());
+                }//ensures moveable piece
+                
+
+                Piece movePiece = b.getTiles()[startCoord].getPiece();
+                List<Integer> possibleMovesInt = movePiece.findLegalMoves(b);
+                List<String> possibleMovesString = new ArrayList<>(); 
+                for (Integer move : possibleMovesInt) {
+                    possibleMovesString.add(b.intToString(move));
+                }    
+                
+                
+                System.out.println("The piece you wish to move is: " + movePiece);
+                System.out.println("This piece can move to the following coordinates: ");
+                System.out.println(possibleMovesString);
+                
+                System.out.print("Enter the coordinate to move to, or -1 to choose a different piece: ");
+                int moveCoord = b.stringToInt(s.next());
+
+                while(moveCoord != -1 && !possibleMovesInt.contains(moveCoord)){
+                    System.out.println("That is not a valid move.");
+                    System.out.print("Enter the coordinate to move to, or -1 to choose a different piece: ");
+                    moveCoord = b.stringToInt(s.next());
+                }
+
+                if(possibleMovesInt.contains(moveCoord)){//succesful move
+                    movePiece.makeMove(b, moveCoord);
+                    whiteTurn = true;
+                }
+
             }
         }
-        
+        System.out.println(b);
         s.close();
-        if(b.getBlackKing().isCheckmate(b)){
+        if(b.isCheckmate(Faction.BLACK)){
             System.out.println("WHITE WINS");
         }
-        else if(b.getWhiteKing().isCheckmate(b)){
+        else if(b.isCheckmate(Faction.WHITE)){
             System.out.println("BLACK WINS");
         }
        

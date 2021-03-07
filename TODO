@@ -1,28 +1,11 @@
-2. Implement other pieces
-3. Implement Player class? create turns
+Prevent moving into check, or staying in check
 
-4. getWhitePieces() and getBlackPieces() in Board.java
-5. For a piece to move, king must be safe - to do this, 
-    Check movement is valid given already defined parameters, 
-    then, create a duplicate board, and check possible moves of all pieces, 
-    if they can attack the king, the move is no longer valid.
-6. Fix null pointer error in checkmate
-7. Lastly, Implement the unique moves
-    Pawn Promotion
-    Pawn en Passant
-    King Castle
-    
+Pawn Promotion
 
-Additionally - scanner exception handling
+Castling
 
-UNICODE:
+En Passant
 
-WHITE
-9812 - king
-9813 - queen
-9814 - rook
-9815 - bishop
-9816 - knight
-9817 - Pawn
+exception handling 
 
-Same +6 for black
+code tidying

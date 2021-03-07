@@ -7,7 +7,7 @@ import Game.Board;
 
 public class Bishop extends Piece {
     
-    private int[] BISHOP_MOVE_OFFSETS = {-9, -7, 7, 9}; //*row
+    private int[] BISHOP_MOVE_OFFSETS = {-9, -7, 7, 9}; //x row for all 
 
     public Bishop(Faction color, int coordinate) {
         super(color, PieceType.BISHOP, coordinate, true);
