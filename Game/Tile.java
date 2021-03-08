@@ -39,11 +39,4 @@ public class Tile {
         return this.piece; 
     }
     
-    /*public static void main(String[] args) {
-        Tile t = new Tile(15, null);
-        System.out.println(t.getCoordinate());
-        System.out.println(t.getRow());
-        System.out.println(t.getColumn());
-        System.out.println(t.isOccupied());
-    }*/
 }
