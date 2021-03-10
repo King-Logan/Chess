@@ -7,7 +7,7 @@ import Game.Board;
 
 public class Rook extends Piece {
 
-    private int[] ROOK_MOVE_OFFSETS = {-8, -1, 1, 8};
+    private int[] ROOK_MOVE_OFFSETS = {-8, -1, 1, 8}; //directions rook can go in
 
     public Rook(Faction color, int coordinate) {
         super(color, PieceType.ROOK, coordinate, true);
@@ -39,7 +39,7 @@ public class Rook extends Piece {
                             if(board.getTiles()[moveCoordinate].getPiece().getColor() != this.getColor()){//take a piece
                                 legalMoves.add(moveCoordinate);
                             }
-                            i = 8;
+                            i = 8;//stop going in direction
                         }
                         else{
                             legalMoves.add(moveCoordinate);

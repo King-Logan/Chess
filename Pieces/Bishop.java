@@ -38,7 +38,7 @@ public class Bishop extends Piece {
                             if(board.getTiles()[moveCoordinate].getPiece().getColor() != this.getColor()){//take a piece
                                 legalMoves.add(moveCoordinate);
                             }
-                            i = 8;
+                            i = 8;//stop going in direction
                         }
                         else{
                             legalMoves.add(moveCoordinate);

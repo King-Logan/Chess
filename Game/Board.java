@@ -13,6 +13,7 @@ import Pieces.Piece;
 import Pieces.Queen;
 import Pieces.Rook;
 import Pieces.Piece.Faction;
+import Pieces.Piece.PieceType;
 
 public class Board {
     Tile[] tiles;
@@ -62,7 +63,7 @@ public class Board {
     }
 
     public int stringToInt(String strCoord){
-        if(strCoord.equals("-1")){
+        if(strCoord.equals("-1") || strCoord.length() != 2){
             return -1;
         }
         
@@ -109,7 +110,7 @@ public class Board {
 
     public King getWhiteKing(){
         for( Piece piece : this.getWhitePieces()){
-            if(piece.toString() == " " + ( (char) 9812) + " "){
+            if(piece.getType() == PieceType.KING){
                 return (King) piece;
             }
         }
@@ -136,7 +137,7 @@ public class Board {
     
     public King getBlackKing(){
         for( Piece piece : this.getBlackPieces()){
-            if(piece.toString() == " " + ( (char) 9818) + " "){
+            if(piece.getType() == PieceType.KING){
                 return (King) piece;
             }
         }
@@ -201,22 +202,38 @@ public class Board {
         return true;
     }
 
+    
+    public void promotePawn(Piece pawn, String userIn){
+        //user must only enter at least first character of piece
+        if(userIn.toLowerCase().startsWith("k")){
+            this.getTiles()[pawn.getCoordinate()].setPiece(new Knight(pawn.getColor(), pawn.getCoordinate()));
+        }else if(userIn.toLowerCase().startsWith("b")){
+            this.getTiles()[pawn.getCoordinate()].setPiece(new Bishop(pawn.getColor(), pawn.getCoordinate()));
+        }else if(userIn.toLowerCase().startsWith("r")){
+            this.getTiles()[pawn.getCoordinate()].setPiece(new Rook(pawn.getColor(), pawn.getCoordinate()));
+        }else{
+            this.getTiles()[pawn.getCoordinate()].setPiece(new Queen(pawn.getColor(), pawn.getCoordinate()));
+        }
+        pawn.setCoordinate(-1);
+    }
+
+
     public static void main(String[] args) {
         boolean whiteTurn = true;
         Scanner s = new Scanner(System.in);
         Board b = new Board(true);
-        while(!b.isCheckmate(Faction.BLACK) && !b.isCheckmate(Faction.WHITE)) {
+        while(!b.isCheckmate(Faction.BLACK) && !b.isCheckmate(Faction.WHITE)) { //while no player has lost
 
-            while(whiteTurn){
+            while(whiteTurn){ //loop for white turn
                 System.out.println(b);
                 if(b.isCheck(Faction.WHITE)){
                     System.out.println("YOU ARE IN CHECK");
                 }
                 System.out.println("White's Move");
                 System.out.print("Type the coordinate of the piece you wish to move: ");
-                int startCoord = b.stringToInt(s.next());
+                int startCoord = b.stringToInt(s.next()); //takes user input for piece to move
 
-                while(!b.getWhitePieceCoordinates().contains(startCoord) || b.getTiles()[startCoord].getPiece().findLegalMoves(b).isEmpty()){
+                while(!b.getWhitePieceCoordinates().contains(startCoord) || b.getTiles()[startCoord].getPiece().findLegalMoves(b).isEmpty()){//piece has to exist and be able to move from tile
                     System.out.println("White cannot move from that coordinate");
                     System.out.print("Enter a valid coordinate:");
                     startCoord = b.stringToInt(s.next());
@@ -238,22 +255,27 @@ public class Board {
                 System.out.print("Enter the coordinate to move to, or -1 to choose a different piece: ");
                 int moveCoord = b.stringToInt(s.next());
 
-                while(moveCoord != -1 && !possibleMovesInt.contains(moveCoord)){
+                while(moveCoord != -1 && !possibleMovesInt.contains(moveCoord) && !movePiece.testSafeKingMove(b, moveCoord)){
                     System.out.println("That is not a valid move.");
                     System.out.print("Enter the coordinate to move to, or -1 to choose a different piece: ");
                     moveCoord = b.stringToInt(s.next());
                 }
 
-                if(possibleMovesInt.contains(moveCoord)){//succesful move
+                if(possibleMovesInt.contains(moveCoord)){//legal move
                     movePiece.makeMove(b, moveCoord);
                     whiteTurn = false;
+                    if(movePiece.getType() == PieceType.PAWN && moveCoord / 8 == 7){
+                        System.out.println("Enter the type of piece to promote your pawn into");
+                        System.out.println("Valid options are Queen, Rook, Bishop, or Knight");
+                        b.promotePawn(movePiece, s.next());
+                    }
                 }
             }
             if(b.isCheckmate(Faction.BLACK)){
                 break;
             }
             
-            while(!whiteTurn){
+            while(!whiteTurn){ //black turn
                 System.out.println(b);
                 if(b.isCheck(Faction.BLACK)){
                     System.out.println("YOU ARE IN CHECK");
@@ -293,6 +315,11 @@ public class Board {
                 if(possibleMovesInt.contains(moveCoord)){//succesful move
                     movePiece.makeMove(b, moveCoord);
                     whiteTurn = true;
+                    if(movePiece.getType() == PieceType.PAWN && moveCoord / 8 == 0){
+                        System.out.println("Enter the type of piece to promote your pawn into");
+                        System.out.println("Valid options are Queen, Rook, Bishop, or Knight");
+                        b.promotePawn(movePiece, s.next());
+                    }
                 }
 
             }

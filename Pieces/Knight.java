@@ -7,7 +7,7 @@ import Game.Board;
 
 public class Knight extends Piece{
 
-    private int[] KNIGHT_MOVE_OFFSETS = {-17, -15, -10, -6, 6, 10, 15, 17};
+    private int[] KNIGHT_MOVE_OFFSETS = {-17, -15, -10, -6, 6, 10, 15, 17}; //exact offsets a knight can move to 
 
     public Knight(Faction color, int coordinate) { 
         super(color, PieceType.KNIGHT, coordinate, true);

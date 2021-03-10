@@ -1,6 +1,7 @@
 package Game;
 
 import Pieces.Piece;
+import Pieces.Piece.PieceType;
 
 public class Tile {
     private int coordinate; //numerical value of tile
@@ -12,7 +13,7 @@ public class Tile {
     }
 
     public boolean isOccupied(){
-        if(this.getPiece().toString() != "   " ){
+        if(!(this.getPiece().getType() == PieceType.NONE)){
             return true;
         }
         return false;

@@ -56,21 +56,18 @@ public class Pawn extends Piece {
                 }
             }
             //attack moves
-            if(coordinate - 7 >= 0 && coordinate % 8 != 0){//cannot make left diag attack if in left row
+            if(coordinate - 7 >= 0 && coordinate % 8 != 7){//cannot make left diag attack if in left row
                 if(board.getTiles()[coordinate - 7].getPiece().getColor() == Faction.WHITE){
                     legalMoves.add(coordinate - 7);
                 }
             }
-            if (coordinate - 9 >= 0 && coordinate % 8 != 7) {
+            if (coordinate - 9 >= 0 && coordinate % 8 != 0) {
                 if(board.getTiles()[coordinate - 9].getPiece().getColor() == Faction.WHITE){
                     legalMoves.add(coordinate - 9);
                 }
 
             }
         }
-
-
         return legalMoves;
     }
-    
 }
