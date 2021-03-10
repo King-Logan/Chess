@@ -15,10 +15,10 @@ public class Bishop extends Piece {
 
     public String toString() {
         if(this.getColor() == Faction.WHITE){
-            return " " + ( (char) 9821) + " ";
+            return " " + ( (char) 9815) + " ";
         }
         else{
-            return " " + ( (char) 9815) + " ";
+            return " " + ( (char) 9821) + " ";
         }
     }
     

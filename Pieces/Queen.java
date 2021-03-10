@@ -15,10 +15,10 @@ public class Queen extends Piece {
 
     public String toString() {
         if(this.getColor() == Faction.WHITE){
-            return " " + ( (char) 9819) + " ";
+            return " " + ( (char) 9813) + " ";
         }
         else{
-            return " " + ( (char) 9813) + " ";
+            return " " + ( (char) 9819) + " ";
         }
     }
 

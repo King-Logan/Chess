@@ -13,10 +13,10 @@ public class Pawn extends Piece {
 
     public String toString() {
         if(this.getColor() == Faction.WHITE){
-            return " " + ( (char) 9823) + " ";
+            return " " + ( (char) 9817) + " ";
         }
         else{
-            return " " + ( (char) 9817) + " ";
+            return " " + ( (char) 9823) + " ";
         }
     }
 

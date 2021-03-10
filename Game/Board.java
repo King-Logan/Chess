@@ -109,7 +109,7 @@ public class Board {
 
     public King getWhiteKing(){
         for( Piece piece : this.getWhitePieces()){
-            if(piece.toString() == " " + ( (char) 9818) + " "){
+            if(piece.toString() == " " + ( (char) 9812) + " "){
                 return (King) piece;
             }
         }
@@ -136,7 +136,7 @@ public class Board {
     
     public King getBlackKing(){
         for( Piece piece : this.getBlackPieces()){
-            if(piece.toString() == " " + ( (char) 9812) + " "){
+            if(piece.toString() == " " + ( (char) 9818) + " "){
                 return (King) piece;
             }
         }

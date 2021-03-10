@@ -16,10 +16,10 @@ public class King extends Piece {
 
     public String toString() {
         if(this.getColor() == Faction.WHITE){
-            return " " + ( (char) 9818) + " ";
+            return " " + ( (char) 9812) + " ";
         }
         else{
-            return " " + ( (char) 9812) + " ";
+            return " " + ( (char) 9818) + " ";
         }
     }
 

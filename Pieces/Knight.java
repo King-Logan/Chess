@@ -15,10 +15,10 @@ public class Knight extends Piece{
 
     public String toString() {
         if(this.getColor() == Faction.WHITE){
-            return " " + ( (char) 9822) + " ";
+            return " " + ( (char) 9816) + " ";
         }
         else{
-            return " " + ( (char) 9816) + " ";
+            return " " + ( (char) 9822) + " ";
         }
     }
 

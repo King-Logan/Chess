@@ -15,10 +15,10 @@ public class Rook extends Piece {
 
     public String toString() {
         if(this.getColor() == Faction.WHITE){
-            return " " + ( (char) 9820) + " ";
+            return " " + ( (char) 9814) + " ";
         }
         else{
-            return " " + ( (char) 9814) + " ";
+            return " " + ( (char) 9820) + " ";
         }
     }
 
